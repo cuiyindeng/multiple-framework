@@ -19,6 +19,8 @@ package com.exercise.rocketmq.consumer;
 
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,8 +29,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RocketMQMessageListener(topic = "${demo.rocketmq.topic}", consumerGroup = "string_consumer")
 public class StringConsumer implements RocketMQListener<String> {
+
+    Logger logger = LoggerFactory.getLogger(StringConsumer.class);
+
     @Override
     public void onMessage(String message) {
-        System.out.printf("------- StringConsumer received: %s \n", message);
+        logger.info("------- StringConsumer received: {} \n", message);
     }
+
 }

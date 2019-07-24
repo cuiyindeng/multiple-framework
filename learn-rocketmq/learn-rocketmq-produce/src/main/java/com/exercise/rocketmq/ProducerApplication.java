@@ -45,6 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @SpringBootApplication
 public class ProducerApplication implements CommandLineRunner {
+
     private static final String TX_PGROUP_NAME = "myTxProducerGroup";
     @Resource
     private RocketMQTemplate rocketMQTemplate;
@@ -66,8 +67,8 @@ public class ProducerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Send string
-//        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, "Hello, World!-1");
-//        System.out.printf("syncSend1 to topic %s sendResult=%s %n", springTopic, sendResult);
+        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, "Hello, World!-3");
+        System.out.printf("syncSend1 to topic %s sendResult=%s %n", springTopic, sendResult);
 
         // Use the extRocketMQTemplate
 //        sendResult = extRocketMQTemplate.syncSend(springTopic, "Hello, World!");
@@ -78,16 +79,16 @@ public class ProducerApplication implements CommandLineRunner {
 //        System.out.printf("syncSend2 to topic %s sendResult=%s %n", springTopic, sendResult);
 
         // Send user-defined object
-        rocketMQTemplate.asyncSend(orderPaidTopic, new OrderPaidEvent("T_002", new BigDecimal("89.00")), new SendCallback() {
-            public void onSuccess(SendResult var1) {
-                System.out.printf("async onSucess SendResult=%s %n", var1);
-            }
-
-            public void onException(Throwable var1) {
-                System.out.printf("async onException Throwable=%s %n", var1);
-            }
-
-        });
+//        rocketMQTemplate.asyncSend(orderPaidTopic, new OrderPaidEvent("T_003", new BigDecimal("90.00")), new SendCallback() {
+//            public void onSuccess(SendResult var1) {
+//                System.out.printf("async onSucess SendResult=%s %n", var1);
+//            }
+//
+//            public void onException(Throwable var1) {
+//                System.out.printf("async onException Throwable=%s %n", var1);
+//            }
+//
+//        });
 
         // Send message with special tag
 //        rocketMQTemplate.convertAndSend(msgExtTopic + ":tag0", "I'm from tag0");  // tag0 will not be consumer-selected

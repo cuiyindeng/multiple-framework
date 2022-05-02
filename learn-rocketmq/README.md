@@ -11,7 +11,10 @@
      storePathRootDir=/opt/rocketmq/store-a
 
 
+     sudo su
+     
      nohup sh bin/mqnamesrv &
      sh bin/mqshutdown namesrv
 
      nohup sh bin/mqbroker -c conf/2m-2s-sync/broker-a.properties &
+     sh bin/mqshutdown broker

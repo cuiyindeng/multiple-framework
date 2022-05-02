@@ -67,7 +67,7 @@ public class ProducerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Send string
-        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, "Hello, World!-3");
+        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, "Hello, World!-0");
         System.out.printf("syncSend1 to topic %s sendResult=%s %n", springTopic, sendResult);
 
         // Use the extRocketMQTemplate
@@ -98,7 +98,7 @@ public class ProducerApplication implements CommandLineRunner {
 
 
         // Send a batch of strings
-//        testBatchMessages();
+        testBatchMessages();
 
         // Send transactional messages
 //        testTransaction();
